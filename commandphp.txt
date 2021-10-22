@@ -1,0 +1,22 @@
+
+to start laravel project:
+php artisan serve
+-----------------------------------------------
+to make new file with resources 
+ php artisan make:controller NewsController --resource
+-----------------------------------
+to make new file 
+php artisan make:controller FirstController
+-----------------------------
+laravel ui
+composer require laravel/ui --dev
+--------------------------------
+ui view  so we need also install npm 
+php artisan ui vue --auth
+npm install && npm run dev
+----------------------------------
+to migrate auth db
+php artisan migrate
+-----------------------------------
+to refresh after ,odify in server
+composer dump-autoload
