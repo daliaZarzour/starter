@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Admin\SecondController;
 use App\Http\Controllers\NewsController; 
 
@@ -98,3 +99,8 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
 
+
+
+Route::get('redirect/{service}',[App\Http\Controllers\SocialController::class,'redirect']);
+
+Route::get('callback/{service}',[SocialController::class,'callback']);

@@ -20,3 +20,7 @@ php artisan migrate
 -----------------------------------
 to refresh after ,odify in server
 composer dump-autoload
+
+---------------------
+get social login as facebook
+ composer require laravel/socialite
