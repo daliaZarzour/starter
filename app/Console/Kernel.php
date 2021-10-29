@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Console;
-
+use APP\Console\Commands\expiration;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +25,11 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+           $schedule->command('user:expire')->everyMinute();
+           $schedule->command('notify:email')->everyMinute();
+
+
+           
     }
 
     /**

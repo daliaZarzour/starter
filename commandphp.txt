@@ -24,3 +24,12 @@ composer dump-autoload
 ---------------------
 get social login as facebook
  composer require laravel/socialite
+ ----------------------
+ to make command 
+ php artisan make:command expiration
+ --------------------
+ run chedule
+ php artisan schedule:run 
+ ---------------------------------
+ to make model
+ php artisan make:model Offer   

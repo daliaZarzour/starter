@@ -3,6 +3,7 @@ use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Admin\SecondController;
+use App\Http\Controllers\CrudController;
 use App\Http\Controllers\NewsController; 
 
 
@@ -104,3 +105,22 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('redirect/{service}',[App\Http\Controllers\SocialController::class,'redirect']);
 
 Route::get('callback/{service}',[SocialController::class,'callback']);
+
+Route::get('fillable',[CrudController::class,'getOffers']);
+
+
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']], function () {
+
+
+Route::group(['prefix' =>'offers'],function(){
+   // Route::get('store',[CrudController::class,'store']);
+
+   
+
+ 
+   Route::get('create',[CrudController::class,'create']);
+});
+
+   
+   Route::post('store',[CrudController::class,'store'])->name('offers.store');
+});
