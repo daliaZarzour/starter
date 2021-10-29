@@ -4,5 +4,6 @@
 return [
 
 'hi' =>'Welcome',
+"name"=>'name'
 ]
 ?>
