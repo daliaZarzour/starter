@@ -6,6 +6,7 @@ use App\Models\Offer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Unique;
+use Illuminate\View\ViewName;
 use Symfony\Contracts\Service\Attribute\Required;
 
 class CrudController extends Controller
@@ -35,9 +36,11 @@ class CrudController extends Controller
 
         //insert in database
         Offer::create([
-            'name'    => $request->name,
-            'price'   =>  $request->price,
-            'details' =>  $request->details
+            'name_ar'    => $request->name_ar,
+            'name_en'    => $request->name_en,
+            'price'      =>  $request->price,
+            'details_ar' =>  $request->details_ar,
+            'details_en' =>  $request->details_en
         ]);
 
         //return 'successful';
@@ -46,8 +49,9 @@ class CrudController extends Controller
     protected function getMessage(){
         return $messages=
         [
-            'name.unique'     =>'الاسم مكرر',
-            'name.required'   =>'مطلوبب'
+            'name_ar.unique'     =>'الاسم مكرر',
+            'name_ar.required'   =>'مطلوبب'
+            
 
         ];
 
@@ -56,9 +60,19 @@ class CrudController extends Controller
     protected function getRules(){
         return $rules=
         [
-            'name'      =>'required|max:100|unique:offers,name',
+            'name_ar'      =>'required|max:100|unique:offers,name_ar',
+            'name_en'      =>'required|max:100|unique:offers,name_en',
             'price'     =>'required|numeric',
-            'details'   =>'required'
+            'details_ar'   =>'required',
+            'details_en'   =>'required'
         ];
+    }
+
+
+    protected function getAllOffers(){
+       $offers= Offer::select('id','name_ar','name_en','details_ar','details_en','price')->get();
+        return view('Offers.all',compact('offers'));
+      //  return $offers;
+
     }
 }

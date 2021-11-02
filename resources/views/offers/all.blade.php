@@ -432,78 +432,40 @@
 
 
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">{{__('messages.name_ar')}}</th>
+      <th scope="col">{{__('messages.name_en')}}</th>
+      <th scope="col">{{__('price')}}</th>
+      <th scope="col">{{__('messages.details_ar')}}</th>
+      <th scope="col">{{__('messages.details_en')}}</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+        @foreach ($offers as $offer) 
+      <tr>
+     
+      <td>{{$offer->name_ar}}</td>
+      <td>{{$offer->name_en}}</td>
+      <td>{{$offer->price}}</td>
+      <td>{{$offer->details_ar}}</td>
+      <td>{{$offer->details_en}}</td>
+    </tr>
+          
+       @endforeach 
+   
+   
+  </tbody>
+</table>
 
-    <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            @if (Session::has('successful'))
-            <div class="alert alert-success" role="alert">
-                        {{Session::get('successful')}}
-                            
-                        
-                        </div>
-                
-            @endif
-            <form method="POST" action="{{route('offers.store')}}">
-                @csrf
-                <div class="form-group">
-                    <label for="exampleInputEmail1">{{__('messages.name_ar')}}</label>
-                    <input type="text" class="form-control" id="name_ar" name="name_ar" placeholder="{{__('messages.name_ar')}}">
-                    @error('name_ar')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">{{__('messages.name_en')}}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="{{__('messages.name_en')}}">
-                    @error('name_en')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">price</label>
-                    <input type="text" class="form-control" id="price"name="price"  placeholder="price">
-                    @error('price')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">{{__('messages.details_en')}}</label>
-                    <input type="text" class="form-control" id="details_en"name="details_en"  placeholder="{{__('messages.details_en')}}">
-                    @error('details_en')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1">{{__('messages.details_ar')}}</label>
-                    <input type="text" class="form-control" id="details_ar"name="details_ar"  placeholder="{{__('messages.details_ar')}}">
-                    @error('details_ar')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-               
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+    
 
 
 
 
-        </div>
-    </div>
+       
 </body>
 
 </html>
