@@ -120,9 +120,15 @@ Route::group(['prefix' =>'offers'],function(){
  
    Route::get('create',[CrudController::class,'create']);
    Route::post('store',[CrudController::class,'store'])->name('offers.store');
+
+
+   Route::get('edit/{offerId}',[CrudController::class,'editOffer']);
+   Route::post('update/{offerId}',[CrudController::class,'UpdateOffer'])->name('offers.update');
    Route::get('all',[CrudController::class,'getAllOffers']);
+
+  
 });
 
    
-  
+Route::get('youtube',[CrudController::class,'getVideo']);
 });

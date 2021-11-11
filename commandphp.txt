@@ -33,3 +33,14 @@ get social login as facebook
  ---------------------------------
  to make model
  php artisan make:model Offer   
+ -----------------------------------
+ make request 
+ php artisan make:request OfferRequest
+
+ ------------------------------------
+ make event
+ php artisan make:event Video
+
+ ------------------------------------
+ make listener 
+  php artisan make:listener IncreaseViewer

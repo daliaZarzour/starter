@@ -432,7 +432,7 @@
 
 
 
-
+<h1 class="center">Edit</h1>
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             @if (Session::has('successful'))
@@ -443,21 +443,11 @@
                         </div>
                 
             @endif
-            <form method="POST" action="{{route('offers.store')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('offers.update',$offer->id)}}">
                 @csrf
                 <div class="form-group">
-                    <label for="exampleInputEmail1">UPLOAD IMAGE</label>
-                    <input type="file" class="form-control" id="photo" name="photo" placeholder="photo">
-                    @error('photo')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
-                </div>
-                <div class="form-group">
                     <label for="exampleInputEmail1">{{__('messages.name_ar')}}</label>
-                    <input type="text" class="form-control" id="name_ar" name="name_ar" placeholder="{{__('messages.name_ar')}}">
+                    <input type="text" class="form-control" id="name_ar" name="name_ar" placeholder="{{__('messages.name_ar')}}" value="{{$offer->name_ar}}">
                     @error('name_ar')
                     <div class="alert alert-danger" role="alert">
                         {{$message}}
@@ -467,7 +457,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">{{__('messages.name_en')}}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="{{__('messages.name_en')}}">
+                    <input type="text" class="form-control" id="name_en" name="name_en" placeholder="{{__('messages.name_en')}}" value="{{$offer->name_en}}">
                     @error('name_en')
                     <div class="alert alert-danger" role="alert">
                         {{$message}}
@@ -477,7 +467,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">price</label>
-                    <input type="text" class="form-control" id="price"name="price"  placeholder="price">
+                    <input type="text" class="form-control" id="price"name="price"  placeholder="price" value="{{$offer->price}}">
                     @error('price')
                     <div class="alert alert-danger" role="alert">
                         {{$message}}
@@ -487,7 +477,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">{{__('messages.details_en')}}</label>
-                    <input type="text" class="form-control" id="details_en"name="details_en"  placeholder="{{__('messages.details_en')}}">
+                    <input type="text" class="form-control" id="details_en"name="details_en"  placeholder="{{__('messages.details_en')}}" value="{{$offer->details_en}}">
                     @error('details_en')
                     <div class="alert alert-danger" role="alert">
                         {{$message}}
@@ -497,7 +487,7 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">{{__('messages.details_ar')}}</label>
-                    <input type="text" class="form-control" id="details_ar"name="details_ar"  placeholder="{{__('messages.details_ar')}}">
+                    <input type="text" class="form-control" id="details_ar"name="details_ar"  placeholder="{{__('messages.details_ar')}}" value="{{$offer->details_ar}}">
                     @error('details_ar')
                     <div class="alert alert-danger" role="alert">
                         {{$message}}

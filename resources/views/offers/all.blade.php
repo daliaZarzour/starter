@@ -441,17 +441,20 @@
       <th scope="col">{{__('messages.details_ar')}}</th>
       <th scope="col">{{__('messages.details_en')}}</th>
       
+      
+      
     </tr>
   </thead>
   <tbody>
         @foreach ($offers as $offer) 
       <tr>
-     
+      <td>{{$offer->id}}</td>
       <td>{{$offer->name_ar}}</td>
       <td>{{$offer->name_en}}</td>
       <td>{{$offer->price}}</td>
       <td>{{$offer->details_ar}}</td>
       <td>{{$offer->details_en}}</td>
+      <td><a href="{{url('offers/edit/'.$offer->id)}}"  class="btn btn-success">{{__('messages.update')}}</a></td>
     </tr>
           
        @endforeach 
