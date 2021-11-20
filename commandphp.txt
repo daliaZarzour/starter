@@ -44,3 +44,6 @@ get social login as facebook
  ------------------------------------
  make listener 
   php artisan make:listener IncreaseViewer
+  -------------------------------------
+  make middleware
+  php artisan make:middleware  checkAge

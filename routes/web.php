@@ -3,9 +3,11 @@ use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\Admin\SecondController;
+use App\Http\Controllers\Auth\CustomAuthController;
 use App\Http\Controllers\CrudController;
-use App\Http\Controllers\NewsController; 
-
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\OfferController;
+use App\Http\Controllers\Relations\RelationsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +29,10 @@ Route::get('/', function () {
     // $data['name']='dalia';
      return view('welcome',$data);
 });
-Route::get('/test1',function(){
-    return 'welcome';
+Route::get('/notAdult',function(){
+    return 'welcome you are not allowed';
 
-})->name('a');
+})->name('notAdult');
 Route::get('/test2/{id}',function($id){
     return $id;
 })->name('b');
@@ -124,7 +126,9 @@ Route::group(['prefix' =>'offers'],function(){
 
    Route::get('edit/{offerId}',[CrudController::class,'editOffer']);
    Route::post('update/{offerId}',[CrudController::class,'UpdateOffer'])->name('offers.update');
-   Route::get('all',[CrudController::class,'getAllOffers']);
+   Route::get('all',[CrudController::class,'getAllOffers'])->name('offers.all');
+
+   Route::get('delete/{offerId}',[CrudController::class,'deleteOffer'])->name('offers.delete');
 
   
 });
@@ -132,3 +136,38 @@ Route::group(['prefix' =>'offers'],function(){
    
 Route::get('youtube',[CrudController::class,'getVideo']);
 });
+
+
+###########################begining ajax######################333
+Route::group(['prefix'=>'ajax-offers'],function(){
+//  Route::get('all',[OfferController::class,'all'])->name('ajax.offers.all');
+    Route::get('create',[OfferController::class,'create']);
+    Route::post('store',[OfferController::class,'store'])->name('ajax.offers.store');
+    Route::get('all',[OfferController::class,'all']);
+    Route::post('delete',[OfferController::class,'delete'])->name('ajax.offers.delete');
+    Route::get('edit/{offer_id}',[OfferController::class,'edit'])->name('ajax.offers.edit');
+    
+    Route::post('update',[OfferController::class,'Update'])->name('ajax.offers.update');
+    
+   
+   
+
+});
+###########################begining auth and guards###########################
+Route::group(['middleware'=>'CheckAge','namespace'=>'Auth'],function(){
+    Route::get('adults',[CustomAuthController::class,'adult'])->middleware('auth')->name('adult');
+    Route::get('site',[CustomAuthController::class],'site')->middleware('auth:web');
+    Route::get('admin',[CustomAuthController::class],'admin')->middleware('auth:admin');
+
+   
+});
+
+###########Grud################################
+Route::get('admin/login', [CustomAuthController::class,'adminLogin'])-> name('admin.login');
+Route::post('admin/login', [CustomAuthController::class,'checkAdminLogin'])-> name('save.admin.login');
+
+
+
+
+##########################Relations########################
+Route::get('has-one',[RelationsController::class,'hasOneRelation']);

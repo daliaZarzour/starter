@@ -110,6 +110,17 @@ class CrudController extends Controller
         $offer->update($request ->all());
         return redirect()->back()->with(['success'=>'Successfully update']);
     }
+
+
+    public function deleteOffer($offerId){
+        $offer=Offer::find($offerId);
+        if(! $offerId) return redirect()->back()->with(['error'=>'error']);
+        $offer->delete();
+        return redirect()
+             ->route('offers.all')
+             ->with(['success'=>'success']);
+
+    }
     // protected function saveImage($photo,$folder){
     //     //save photo in folder 
     //     $file_extention=$photo->getClientOriginalExtension();
