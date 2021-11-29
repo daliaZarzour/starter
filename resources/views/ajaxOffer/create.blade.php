@@ -21,62 +21,57 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">UPLOAD IMAGE</label>
                     <input type="file" class="form-control" id="photo" name="photo" placeholder="photo">
-                    @error('photo')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
+                    <small  id="photo_error" class="form-text text-danger" ></small>  
+                    
+                      
+                   
                         
-                    @enderror
+                   
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">{{__('messages.name_ar')}}</label>
                     <input type="text" class="form-control" id="name_ar" name="name_ar" placeholder="{{__('messages.name_ar')}}">
-                    @error('name_ar')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
+                   
+                    
+                    <small  id="name_ar_error" class="form-text text-danger" ></small> 
+                   
                         
-                    @enderror
+                   
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">{{__('messages.name_en')}}</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" placeholder="{{__('messages.name_en')}}">
-                    @error('name_en')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
+                    
+                   
+                    <small  id="name_en_error" class="form-text text-danger" ></small>  
+                    
                         
-                    @enderror
+                   
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">price</label>
                     <input type="text" class="form-control" id="price"name="price"  placeholder="price">
-                    @error('price')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
+                  
                         
-                    @enderror
+                    <small  id="price_error" class="form-text text-danger" ></small>  
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">{{__('messages.details_en')}}</label>
-                    <input type="text" class="form-control" id="details_en"name="details_en"  placeholder="{{__('messages.details_en')}}">
-                    @error('details_en')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
+                    <input  type="text" class="form-control" id="details_en"name="details_en"  placeholder="{{__('messages.details_en')}}">
+                   
+                  
+                    
+                    <small  id="details_en_error" class="form-text text-danger" ></small> 
                         
-                    @enderror
+                   
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">{{__('messages.details_ar')}}</label>
-                    <input type="text" class="form-control" id="details_ar"name="details_ar"  placeholder="{{__('messages.details_ar')}}">
-                    @error('details_ar')
-                    <div class="alert alert-danger" role="alert">
-                        {{$message}}
-                    </div>
-                        
-                    @enderror
+                    <input  type="text" class="form-control" id="details_ar"name="details_ar"  placeholder="{{__('messages.details_ar')}}">
+                   
+                    <small  id="details_ar_error" class="form-text text-danger" ></small> 
+                     
+                   
                 </div>
                
                 <button id="save_offer"type="" class="btn btn-primary">Save</button>
@@ -96,6 +91,15 @@
 <script>
     $(document).on('click','#save_offer', function (e) {
         e.preventDefault();
+        
+
+        $('#photo_error').text('');
+            $('#name_ar_error').text('');
+            $('#name_en_error').text('');
+            $('#price_error').text('');
+            $('#details_ar_error').text('');
+            $('#details_en_error').text('');
+        
       //  var formData = new FormData($('#offerform')[0]);
         var formData = new FormData($('#offerForm')[0]);
         $.ajaxSetup({
@@ -128,6 +132,13 @@
 
         },
         error:function(reject){
+            var response=$.parseJSON(reject.responseText);
+            $.each(response.errors,function(key,val){
+                $("#"+key+"_error").text(val[0]);
+            
+                
+                
+            });
 
         },
 

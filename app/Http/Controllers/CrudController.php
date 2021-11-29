@@ -83,8 +83,10 @@ class CrudController extends Controller
 
 
     protected function getAllOffers(){
-       $offers= Offer::select('id','name_ar','name_en','details_ar','details_en','price')->get();
-        return view('Offers.all',compact('offers'));
+      // $offers= Offer::select('id','name_ar','name_en','details_ar','details_en','price')->get();
+      #########paginate############## 
+      $offers= Offer::select('id','name_ar','name_en','details_ar','details_en','price')->paginate(PAGINATE_cOUNT);
+      return view('Offers.all',compact('offers'));
       //  return $offers;
 
     }

@@ -8,7 +8,7 @@ use App\Http\Controllers\CrudController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\Relations\RelationsController;
-
+define('PAGINATE_cOUNT',2);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -171,3 +171,35 @@ Route::post('admin/login', [CustomAuthController::class,'checkAdminLogin'])-> na
 
 ##########################Relations########################
 Route::get('has-one',[RelationsController::class,'hasOneRelation']);
+Route::get('has-one-reserve',[RelationsController::class,'hasOneRelationReverse']);
+Route::get('get-user-has-phone',[RelationsController::class,'getUserHasPhone']);
+Route::get('get-user-has-phone-with-condition',[RelationsController::class,'getUserWhereHasPhoneWithCondition']);
+Route::get('get-user-not-has-phone',[RelationsController::class,'getUserNotHasPhone']);
+######################### ONE TO MANY RELATIONS ###################
+Route::get('hospitals',[RelationsController::class,'hospitals'])->name('hospitals');
+Route::get('doctors/{hospital_id}',[RelationsController::class,'doctors'])-> name('hospital.doctors');
+//Route::get('hospitals/{hospital_id}','Relation\RelationsController@deleteHospital') -> name('hospital.delete');
+Route::get('hospitals_has_doctors',[RelationsController::class,'hospitalsHasDoctor']);
+Route::get('hospitals_has_doctors_male',[RelationsController::class,'hospitalsHasOnlyMaleDoctors']);
+Route::get('hospitals_not_has_doctors',[RelationsController::class,'hospitals_not_has_doctors']);
+
+
+##################################Many to Many###################################
+Route::get('doctors-services',[RelationsController::class,'getDoctorsService']);
+Route::get('service-doctors',[RelationsController::class,'getServiceDoctors']);
+Route::get('doctors/servics/{doctor_id}',[RelationsController::class,'getDoctorsServices']);
+Route::post('saveServices-to-doctor',[RelationsController::class,'saveServicesToDoctors'])->name('save.doctors.services');
+
+
+########################################HAS ONe THROUGH##########################################
+Route::get('has-one-through',[RelationsController::class,'has_one_through']);
+########################################HAS Many THROUGH##########################################
+Route::get('doctorsInCountry',[RelationsController::class,'doctorsInCountry']);
+
+
+
+
+
+
+
+
